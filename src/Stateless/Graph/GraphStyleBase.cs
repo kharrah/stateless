@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Stateless.Reflection;
 
 namespace Stateless.Graph
 {
@@ -17,6 +18,21 @@ namespace Stateless.Graph
         /// </summary>
         /// <returns>Prefix text</returns>
         public abstract string GetPrefix();
+
+        /// <summary>
+        /// Get the text that must be present at the bottom of a state graph file.
+        /// For example, for DOT files the sufix text would be
+        /// }
+        /// </summary>
+        /// <returns>Prefix text</returns>
+        public abstract string GetSuffix();
+
+        /// <summary>
+        /// Add initial transition
+        /// </summary>
+        /// <param name="initialState"></param>
+        /// <returns></returns>
+        public abstract string FormatInitialTransition(StateInfo initialState);
 
         /// <summary>
         /// Returns the formatted text for a single state.

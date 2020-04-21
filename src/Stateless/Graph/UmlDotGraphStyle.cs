@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Stateless.Reflection;
 
 namespace Stateless.Graph
 {
@@ -18,6 +19,30 @@ namespace Stateless.Graph
                       + "compound=true;\n"
                       + "node [shape=Mrecord]\n"
                       + "rankdir=\"LR\"\n";
+        }
+
+        /// <summary>
+        /// Get the text that ends a new graph
+        /// </summary>
+        /// <returns></returns>
+        public override string GetSuffix()
+        {
+            return "\n}";
+        }
+
+        /// <summary>
+        /// Add initial transition
+        /// </summary>
+        /// <param name="initialState"></param>
+        /// <returns></returns>
+        public override string FormatInitialTransition(StateInfo initialState)
+        {
+            var initialStateName = initialState.UnderlyingState.ToString();
+
+            var initialTransitionString = $"\n init [label=\"\", shape=point];";
+            initialTransitionString += $"\n init -> {initialStateName}[style = \"solid\"]";
+
+            return initialTransitionString;
         }
 
         /// <summary>
